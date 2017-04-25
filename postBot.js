@@ -31,8 +31,6 @@ function followed(eventMsg){
 }
 //setInterval(tweetIt("swag"), 1000 * 20);
 
-tweetIt("Hoping to set up a server to be able to keep this bot running constantly :-)")
-
 function tweetIt(txt){
     var tweet = {
       status: txt
