@@ -15,29 +15,30 @@ var T = new Twit(config);
 //user stream
 var stream = T.stream('user');
 //called when followed
-stream.on('follow', followed);
+stream.on('tweet', tweetEvent);
 
-function followed(eventMsg){
-  console.log('Event Occurred');
-//name of person
-  var name = eventMsg.source.name;
-//screen name or @name
-  var screenName = eventMsg.source.screen_name;
+function tweetEvent(eventMsg){
+    console.log('Tweet Event Occurred');
 
-  console.log("Followed Event");
+    var json = JSON.stringify(eventMsg,null,2);
+    fs.writeFile("tweet.json",json);
 
-  tweetIt('.@' + screenName + ' Thank you for following me! You have a ton of swag.');
+    var replyto = eventMsg.in_reply_to_screen_name;
+    var text = eventMsg.text;
+    var from = eventMsg.user.screen_name;
+
+
+    if (replyto === 'MY_USERNAME'){
+      tweetIt('Hey @' + from + ' thank you for tweeting at me!');
+    }
+
 
 }
 //setInterval(tweetIt("swag"), 1000 * 20);
-
-tweetIt("Hoping to set up a server to be able to keep this bot running constantly :-)")
-
 function tweetIt(txt){
     var tweet = {
       status: txt
     }
-    T.post('statuses/update', tweet, postData);
     function postData(err, data, response) {
         if (err){
           console.log("Something went wrong");
@@ -45,4 +46,5 @@ function tweetIt(txt){
           console.log(data.text);
         }
     }
+    T.post('statuses/update', tweet, postData);
 }
