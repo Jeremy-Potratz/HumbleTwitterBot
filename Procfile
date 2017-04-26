@@ -1,1 +1,1 @@
-worker: node postBot.js
+worker: postBot.js
