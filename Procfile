@@ -1,1 +1,1 @@
-worker: postBot.js
+worker: humbleBot.js
