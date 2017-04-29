@@ -3,9 +3,9 @@ console.log('HumbleBot is running');
 var Twit = require('twit');
 var config = require('./config');
 var T = new Twit(config);
-
-setInterval(checkTweet(), 10000 * 20);
-console.log('Hello');
+checkTweet();
+setInterval(checkTweet, 10000 * 20 * 60);
+//1000 milliseconds * 20 (20 seconds) * 60 (20 minutes)
 function checkTweet(){
 
   var params = {
@@ -17,7 +17,7 @@ function checkTweet(){
       var tweet = data.statuses;
       if (tweet[0].lang === 'en' ) {
         var screenName = tweet[0].user.screen_name;
-        tweetBack('Hey @' + screenName + ' read this article so you know the full implications of using the R - word. http://www.r-word.org/r-word-effects-of-the-word.aspx');
+        tweetBack('Hey @' + screenName + ' read this article so you know the full implications of using the R-word. http://www.r-word.org/r-word-effects-of-the-word.aspx');
       }
       console.log(tweet[0].text);
       console.log(tweet[0].user.screen_name);
