@@ -5,7 +5,7 @@ var config = require('./config');
 var T = new Twit(config);
 
 setInterval(checkTweet(), 10000 * 20);
-
+console.log('Hello');
 function checkTweet(){
 
   var params = {
@@ -13,7 +13,7 @@ function checkTweet(){
     count: 1
   }
   T.get('search/tweets',params,getData)
-  function getData(err,data,response){
+  function getData(err, data, response){
       var tweet = data.statuses;
       if (tweet[0].lang === 'en' ) {
         var screenName = tweet[0].user.screen_name;
