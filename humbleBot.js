@@ -4,9 +4,8 @@ var Twit = require('twit');
 var config = require('./config');
 var T = new Twit(config);
 
-setInterval(checkTweet(), 10000 * 20 * 60)
+setInterval(checkTweet(), 10000 * 20);
 
-checkTweet();
 function checkTweet(){
 
   var params = {
